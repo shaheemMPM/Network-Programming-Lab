@@ -9,7 +9,7 @@ public class Server{
 	private DataOutputStream out	 = null;
 	private ServerSocket server = null;
 	private DataInputStream in	 = null;
-  public static String client_name, user_name;
+  public static String client_name, user_name, full_name, course, place, age;
 
 	// constructor with port
 	public Server(int port){
@@ -53,7 +53,8 @@ public class Server{
             System.out.print("me : ");
             line = input.nextLine();
           }else{
-            line = "me : "+response;
+            line = response;
+            System.out.println("Boat : "+line);
           }
           out.writeUTF(line);
 					if (line.equals("Over")) {
@@ -78,12 +79,29 @@ public class Server{
     Scanner scanner = new Scanner(System.in);
     System.out.print("Enter user name : ");
     user_name = scanner.nextLine();
+    System.out.println("\nSetup Boat\n----------\n");
+    System.out.print("Full Name : ");
+    full_name = scanner.nextLine();
+    System.out.print("Age : ");
+    age = scanner.nextLine();
+    System.out.print("Current course/class : ");
+    course = scanner.nextLine();
+    System.out.print("Your place : ");
+    place = scanner.nextLine();
+
 		Server server = new Server(3000);
 	}
 
   public static String respond(String query){
-    if (query.equals("What is your name?")) {
-      return "Mohammed Shaheem P";
+    query = query.toLowerCase();
+    if ((query.contains("your") && query.contains("name")) || (query.contains("name") && query.contains("?"))) {
+      return "My Name is "+full_name;
+    }else if ((query.contains("how") && query.contains("old")) || (query.contains("what") && query.contains("age")) || (query.contains("age") && query.contains("?"))) {
+      return "I'm " + age + " years Old";
+    }else if ((query.contains("what") && query.contains("study")) || (query.contains("which") && (query.contains("course") || query.contains("class")))){
+      return "I'm a " + course + " Student";
+    }else if (query.contains("where") && (query.contains("home") || query.contains("house") || query.contains("from"))){
+      return "I'm from "+place;
     }
     return "";
   }
