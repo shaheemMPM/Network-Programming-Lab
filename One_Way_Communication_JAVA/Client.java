@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Client{
 	// initialize socket and input output streams
 	private Socket socket		 = null;
-	private DataInputStream input = null;
+	private Scanner input = null;
 	private DataOutputStream out	 = null;
   public static String user_name;
 
@@ -18,7 +18,7 @@ public class Client{
 			System.out.println("Server connection established");
 
 			// takes input from terminal
-			input = new DataInputStream(System.in);
+			input = new Scanner(System.in);
 
 			// sends output to the socket
 			out = new DataOutputStream(socket.getOutputStream());
@@ -38,7 +38,7 @@ public class Client{
 		while (!line.equals("Over")){
 			try{
         System.out.print("me : ");
-				line = input.readLine();
+				line = input.nextLine();
 				out.writeUTF(line);
 			}catch(IOException i){
 				System.out.println(i);
