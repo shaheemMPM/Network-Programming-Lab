@@ -17,7 +17,7 @@ public class Server{
 		try{
 			server = new ServerSocket(port);
 
-			System.out.println("Server started");
+			System.out.println("Server["+user_name+"] started running on port "+port);
 			System.out.println("Waiting for a client ...");
 
 			socket = server.accept();
@@ -36,7 +36,7 @@ public class Server{
 
       client_name = in.readUTF();
 
-			System.out.println(client_name+"[client] connected");
+			System.out.println("client["+client_name+"] connected");
 
 			String line = "";
 			String fileName = "";
@@ -64,6 +64,9 @@ public class Server{
 						fileContent = "No File with given fileName";
 					}
           out.writeUTF(fileContent);
+				}catch(EOFException eo){
+					System.out.println("Seems like the Connection is closed by the Client["+client_name+"]");
+					break;
 				}catch(IOException i){
 					System.out.println(i);
 				}

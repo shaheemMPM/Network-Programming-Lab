@@ -91,7 +91,7 @@ public class Client{
     Scanner scanner = new Scanner(System.in);
     System.out.print("Enter user name : ");
     user_name = scanner.nextLine();
-    System.out.print("Enter IP of Host : ");
+    System.out.print("Enter IP of Host (127.0.0.1 for localhost) : ");
     ip = scanner.nextLine();
     System.out.print("Enter port number of Host : ");
     port = scanner.nextInt();
